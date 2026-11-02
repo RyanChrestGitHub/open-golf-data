@@ -10,12 +10,12 @@
 
 ## Recurring cycle
 
-1. **Observe:** Contributor files hardware evidence, CI fails, or an external research scout identifies a vendor change.
-2. **Classify:** Create a uniquely referenced evidence item. Distinguish an announcement or anecdote from an authorized physical recording.
-3. **Specify:** Create one narrowly bounded issue with reproducer, expected result and success/failure conditions.
-4. **Implement:** An agent proposes a small PR and adds tests without changing the frozen invariants.
+1. **Observe:** Contributor offers any authorized device data, CI fails, or an external research scout identifies a vendor change.
+2. **Classify:** Stage exact source bytes locally or privately and create a uniquely referenced evidence item. Vendor/source unknown is acceptable. Distinguish an announcement from a real recording.
+3. **Route and specify:** Recognized source -> adapter regression issue if needed; unknown source -> research issue; unsupported access -> evidence request. Create one bounded task, avoid an issue or PR for every duplicate upload.
+4. **Implement:** When evidence supports a code change, an agent opens a **draft** PR with tests without changing the frozen invariants.
 5. **Verify:** Deterministic CI, independent review and (for hardware claims) signed physical test protocol.
-6. **Integrate:** Maintainer approves changes and updates the compatibility evidence.
+6. **Ready for review:** Agent requests maintainer review only when CI passes, security/privacy gates are met and compatibility claims are correctly qualified. Maintainer chooses merge, reject, or more evidence.
 7. **Repeat:** New evidence and CI observations become inputs. A failed validation does not rewrite the verified baseline.
 
 ## GitHub configuration
@@ -29,8 +29,10 @@ On a public repository: public issues and PR content are adversarial input. Do n
 A. Design a versioned real fixture manifest and private-evidence intake process without implementing upload yet.
 B. Add a second deterministic fixture that detects missing fields and simulates a source file written in multiple fragments.
 C. Add an explicit `EventAssociation` type and matching tests that allow abstention rather than guessing.
-D. Prototype a read-only, authorized native-file adapter against an **approved sanitized sample** once obtained.
+D. Prototype a source-specific read-only adapter against the **first approved, reproducible, sanitized sample from any device**, once obtained.
 
 ## Operating budget
 
 Initially, one coding agent is sufficient. Cap repair attempts per issue, limit CI resource usage, require independent review, and keep compatibility claims evidence-backed. A full-time swarm of agents is not a prerequisite.
+
+Detailed intake contract: [RFC-0002](RFC-0002-EVIDENCE-INTAKE.md).

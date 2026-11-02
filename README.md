@@ -49,25 +49,40 @@ The demo includes five independent observations: one native-like device observat
 | Unattributed records excluded from per-player export | Yes | Four-player real-world identity accuracy |
 | Player history exports CSV and JSON | Yes | Secure remote portal and API |
 
+## Source-agnostic evidence intake (new)
+
+The laboratory intentionally **does not prefer Uneekor or any other brand**. Anyone can offer a native export, log, report, screenshot, protocol sample, or an unknown binary format. The first authorized, reproducible real source can become the first physical integration.
+
+Stage your own file locally without sending it anywhere:
+
+```bash
+python -m open_golf_data evidence path/to/file --output lab-evidence --device "optional model" --software "optional software" --version "optional version"
+```
+
+The command computes a digest, preserves the original bytes as `source.bin`, and writes a local `receipt.json` with unverified format hints. The `lab-evidence/` directory is gitignored. **This is not an upload, adapter, privacy filter, source verification, or certification.** Review all files for personal/facility information before sharing.
+
+[Evidence intake and agentic routing RFC](docs/RFC-0002-EVIDENCE-INTAKE.md)
+
 ## The next three milestone issues
 
-1. **E001, source accessibility:** Obtain permission to collect a small native Uneekor/GSPro sample. Document exposed fields, versions, file provenance and physical attempt count. Implement **read-only** fixture ingestion without changing normal play.
-2. **E002, attribution:** Independently observe an alternating-player session; determine whether source-level participant IDs identify observations and if they can be linked to consenting real accounts. Unknown IDs stay unclaimed.
-3. **E003, fidelity:** Reconcile physical attempts, device detections, native records and collector records. Prove byte-preserving export and explain missing fields and mismatches.
+1. **INTAKE-001, generic evidence handoff:** Register evidence offers via public metadata-only GitHub issues; stage arbitrary authorized source files privately without assuming a vendor. Design a secure reviewer-controlled transfer process before accepting public submissions.
+2. **INTAKE-002, classification and routing:** Detect candidate formats, link duplicates, determine whether an adapter exists, and abstain or create an actionable research issue when evidence is insufficient.
+3. **E001–E003, first physical evidence:** Select the first authorized, reproducible hardware source from submissions. Test source accessibility, identity attribution when possible, and field/event fidelity. Do not promise physical verification from replay alone.
 
-**Do not purchase a simulator or deploy code to a commercial machine solely to complete the synthetic stage.** The first physical experiment requires the installation owner's permission and a suitable, controlled observation session.
+**Do not purchase a simulator or deploy code to a commercial machine solely to complete the synthetic stage.** The first physical experiment requires the installation owner's permission and a suitable, controlled observation session; no hardware manufacturer is required first.
 
 ## Engineering system
 
 - [Agent instructions](AGENTS.md)
 - [Architecture RFC](docs/RFC-0001.md)
+- [Source-agnostic evidence intake RFC](docs/RFC-0002-EVIDENCE-INTAKE.md)
 - [Evidence and physical test protocol](docs/LAB-0001.md)
 - [Agentic work loop](docs/AGENT-LOOP.md)
 - [Issue backlog](docs/BACKLOG.md)
 - [First delegated coding task](docs/AGENT-TASK-001.md)
 - [Security and privacy](docs/SECURITY.md)
 
-CI runs the deterministic tests on supported Python versions. **The optional Codex review workflow is manual-only** and requires you to set `OPENAI_API_KEY` as a repository secret before dispatch; it produces a review artifact, not code changes. No scheduled scout, autonomous coding PRs, public submission ingestion, or remote sync is activated by this bootstrap. Those require explicit GitHub configuration and a validated threat model.
+CI runs the deterministic tests on supported Python versions. **The optional Codex review workflow is manual-only** and requires you to set `OPENAI_API_KEY` as a repository secret before dispatch; it produces a review artifact, not code changes. No scheduled scout, autonomous coding PRs, private upload service, or remote sync is activated by this bootstrap. Those require explicit GitHub configuration and a validated threat model.
 
 ## Publishing to GitHub
 

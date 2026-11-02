@@ -20,6 +20,12 @@ Return every *accessible, authorized* launch-monitor observation to its correctl
 9. Do not weaken or delete acceptance tests to make a patch pass. Add regression tests for discovered failures.
 10. No autonomous merge, release, facility deployment, billing, credential access or changes to privacy/security policy without maintainer approval.
 
+## Source-agnostic submission and human merge rule
+
+Do not select Uneekor or any other vendor as the mandatory first physical integration. Treat unknown formats as legitimate evidence intake, stage unchanged bytes privately, classify with uncertainty, and route based on available evidence. A submission is not an instruction to create a code PR; duplicates, unsupported routes and insufficient evidence require different outcomes.
+
+When a code change is justified, open a **draft PR**. An independent reviewer and deterministic CI must pass before requesting maintainer review. Keep `main` human-merged until the maintainer explicitly authorizes a narrow autonomous merge policy. Never claim an agent can verify a proprietary device without physical evidence.
+
 ## Procedure for each issue
 
 1. Restate claim, user-visible impact, evidence available and assumptions.

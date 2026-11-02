@@ -13,3 +13,6 @@ lab-output/
 .env
 .env.*
 .DS_Store
+
+# Unreviewed contributor data MUST NOT be committed
+lab-evidence/

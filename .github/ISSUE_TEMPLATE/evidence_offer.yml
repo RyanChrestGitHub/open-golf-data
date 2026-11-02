@@ -1,0 +1,59 @@
+name: Offer data or propose an integration
+description: For launch-monitor owners, instructors, facilities, and developers with an authorized data source
+labels: [evidence-offer]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for helping golfers access their measurements. **Do not attach raw personal shot history, customer data, device tokens, proprietary recordings, or private logs to this public issue.** Describe what you can share and its origin; the maintainers will discuss secure, permissioned transfer. A source may be unknown; no brand-specific export is required to file an issue.
+  - type: dropdown
+    id: type
+    attributes:
+      label: What could you contribute?
+      options:
+        - Native monitor export or local record
+        - Simulator export or live output
+        - Device log or protocol recording (authorized)
+        - Screenshots or documentation only
+        - Real-hardware test session
+        - Other or unknown
+    validations:
+      required: true
+  - type: input
+    id: device
+    attributes:
+      label: Device or software (if known)
+      placeholder: e.g. a launch monitor, simulator, or unknown format
+    validations:
+      required: false
+  - type: input
+    id: version
+    attributes:
+      label: App / firmware versions (if known)
+    validations:
+      required: false
+  - type: textarea
+    id: known
+    attributes:
+      label: What can you observe or export?
+      description: Describe the route and whether it can be reproduced, without posting actual personal records.
+    validations:
+      required: true
+  - type: dropdown
+    id: permission
+    attributes:
+      label: Rights or permissions for the evidence you can offer
+      options:
+        - My own data and hardware, permitted to share privately
+        - Facility/client data, permission still required
+        - Public documentation or source code
+        - Not sure, seeking guidance
+    validations:
+      required: true
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Safety
+      options:
+        - label: I understand this issue is public and am not attaching raw player data, credentials, or sensitive logs.
+          required: true
