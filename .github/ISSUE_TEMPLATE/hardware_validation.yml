@@ -1,0 +1,46 @@
+name: Hardware evidence / compatibility request
+description: Request support or validation for a launch monitor or simulator
+labels: [hardware-evidence]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do **not** attach customer shot histories, device tokens, identifying raw frames, or proprietary files without permission. Start with a description; maintainers will provide a private evidence intake process when appropriate.
+  - type: input
+    id: vendor
+    attributes:
+      label: Manufacturer and device model
+      placeholder: "e.g. Uneekor EYE XO"
+    validations:
+      required: true
+  - type: input
+    id: software
+    attributes:
+      label: Vendor software + version
+    validations:
+      required: true
+  - type: dropdown
+    id: route
+    attributes:
+      label: Known authorized access route
+      options:
+        - Official API
+        - Native export
+        - Local application file
+        - Existing open-source bridge
+        - Unknown
+    validations:
+      required: true
+  - type: textarea
+    id: observation
+    attributes:
+      label: What have you observed, and how could it be reproduced?
+    validations:
+      required: true
+  - type: checkboxes
+    id: permission
+    attributes:
+      label: Consent and permissions
+      options:
+        - label: I understand that public issues are visible to everyone and will not include private player data or device credentials.
+          required: true

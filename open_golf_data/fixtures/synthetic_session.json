@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "description": "Entirely invented measurements. Demonstrates mixed-player facility and home sessions, unknown fields, and independent monitor/simulator events.",
+  "installations": [
+    {"id": "facility-lab-001", "mode": "facility", "administrator": "synthetic-facility"},
+    {"id": "home-lab-001", "mode": "home", "administrator": "golfer-001"}
+  ],
+  "sessions": [
+    {"id": "facility-session-001", "installation_id": "facility-lab-001"},
+    {"id": "home-session-001", "installation_id": "home-lab-001"}
+  ],
+  "identity_links": [
+    {"session_id": "facility-session-001", "participant_id": "gspro-player-A", "golfer_id": "golfer-001", "evidence": "fictional-participant-confirmation"},
+    {"session_id": "facility-session-001", "participant_id": "gspro-player-B", "golfer_id": "golfer-002", "evidence": "fictional-participant-confirmation"},
+    {"session_id": "home-session-001", "participant_id": "home-player-A", "golfer_id": "golfer-001", "evidence": "fictional-owner-confirmation"}
+  ],
+  "observations": [
+    {
+      "id": "obs-monitor-A1", "installation_id": "facility-lab-001", "session_id": "facility-session-001", "source": "fictional-monitor", "source_event_id": "monitor-001", "source_participant_id": "gspro-player-A", "source_version": "fixture-1", "captured_at": "2026-11-02T18:01:00Z",
+      "native_payload": {"BallVelocity": 141.7, "LaunchV": 14.2, "NewUndocumentedField": 27, "ClubFace": null},
+      "metrics": {"ball_speed": {"value": 141.7, "unit": "mph", "kind": "device_reported"}, "launch_vertical": {"value": 14.2, "unit": "deg", "kind": "device_reported"}, "club_face": {"value": null, "unit": "deg", "kind": "unknown"}}
+    },
+    {
+      "id": "obs-sim-A1", "installation_id": "facility-lab-001", "session_id": "facility-session-001", "source": "fictional-simulator", "source_event_id": "gspro-001", "source_participant_id": "gspro-player-A", "source_version": "fixture-1", "captured_at": "2026-11-02T18:01:01Z",
+      "native_payload": {"SimulatedCarry": 235.4, "SimulatedRoll": 19.8, "Club": "driver"},
+      "metrics": {"carry": {"value": 235.4, "unit": "yd", "kind": "simulated"}, "roll": {"value": 19.8, "unit": "yd", "kind": "simulated"}}
+    },
+    {
+      "id": "obs-monitor-B1", "installation_id": "facility-lab-001", "session_id": "facility-session-001", "source": "fictional-monitor", "source_event_id": "monitor-002", "source_participant_id": "gspro-player-B", "source_version": "fixture-1", "captured_at": "2026-11-02T18:02:00Z",
+      "native_payload": {"BallVelocity": 107.5, "LaunchV": 21.3},
+      "metrics": {"ball_speed": {"value": 107.5, "unit": "mph", "kind": "device_reported"}, "launch_vertical": {"value": 21.3, "unit": "deg", "kind": "device_reported"}}
+    },
+    {
+      "id": "obs-monitor-unclaimed", "installation_id": "facility-lab-001", "session_id": "facility-session-001", "source": "fictional-monitor", "source_event_id": "monitor-003", "source_participant_id": null, "source_version": "fixture-1", "captured_at": "2026-11-02T18:03:00Z",
+      "native_payload": {"BallVelocity": 82.9, "TrackingStatus": "uncertain"},
+      "metrics": {"ball_speed": {"value": 82.9, "unit": "mph", "kind": "device_reported"}}
+    },
+    {
+      "id": "obs-home-A1", "installation_id": "home-lab-001", "session_id": "home-session-001", "source": "fictional-monitor", "source_event_id": "monitor-home-001", "source_participant_id": "home-player-A", "source_version": "fixture-1", "captured_at": "2026-11-02T20:01:00Z",
+      "native_payload": {"BallVelocity": 99.4, "VendorSpinEstimate": 6500},
+      "metrics": {"ball_speed": {"value": 99.4, "unit": "mph", "kind": "device_reported"}, "spin": {"value": 6500, "unit": "rpm", "kind": "vendor_estimated"}}
+    }
+  ]
+}
