@@ -37,6 +37,13 @@ connection does not close its replacement, and Windows cannot remove an open
 SQLite database. The native symlink intake test explicitly skips Windows error
 1314 when link creation lacks privileges; a separate mocked-path test always
 checks rejection before staging. The mock does not establish OS symlink behavior.
+The [intake integrity tests](../tests/test_intake_integrity.py) check empty and
+multi-chunk byte preservation, corruption of an existing staged copy, and source
+changes between hashing and copying. A digest mismatch raises an error without
+overwriting the staged bytes or issuing a new receipt. A failed initial copy can
+leave a directory containing mismatched bytes without a receipt; retain it for
+investigation rather than treating directory existence as successful staging.
+These deterministic checks do not establish crash-safe or concurrent acquisition.
 [CI](../.github/workflows/ci.yml) runs the suite and demo/inspection on Python 3.10
 and 3.13. Local success on one interpreter does not establish those CI results.
 The [documentation check](../tests/test_documentation.py) checks local inline file
