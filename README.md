@@ -74,6 +74,7 @@ The command computes a digest, preserves the original bytes as `source.bin`, and
 ## Engineering system
 
 - [Agent instructions](AGENTS.md)
+- [Engineering playbook](docs/ENGINEERING-PLAYBOOK.md)
 - [Architecture RFC](docs/RFC-0001.md)
 - [Source-agnostic evidence intake RFC](docs/RFC-0002-EVIDENCE-INTAKE.md)
 - [Evidence and physical test protocol](docs/LAB-0001.md)

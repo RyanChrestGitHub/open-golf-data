@@ -24,3 +24,6 @@
 - [ ] No unsupported compatibility claims
 - [ ] Separate review complete
 - [ ] Maintainer review requested (do not auto-merge)
+
+- [ ] Engineering playbook reviewed/updated, or documented why no change is needed
+- [ ] Any AGENTS.md amendments explicitly identified and justified for maintainer approval
