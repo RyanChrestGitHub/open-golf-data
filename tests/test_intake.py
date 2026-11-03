@@ -3,6 +3,7 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 from open_golf_data.intake import stage_evidence
 
@@ -41,9 +42,25 @@ class IntakeTests(unittest.TestCase):
             src = root / "source"
             src.write_text("test")
             alias = root / "alias"
-            alias.symlink_to(src)
-            with self.assertRaises(ValueError):
+            try:
+                alias.symlink_to(src)
+            except OSError as exc:
+                if getattr(exc, "winerror", None) == 1314:
+                    self.skipTest("Creating symlinks requires Windows developer mode or privilege")
+                raise
+            with self.assertRaisesRegex(ValueError, "Symlink input is not allowed"):
                 stage_evidence(alias, root / "lab-evidence")
+
+    def test_symlink_rejection_without_os_privileges(self):
+        with tempfile.TemporaryDirectory() as t:
+            root = Path(t)
+            src = root / "source"
+            src.write_bytes(b"fictional evidence")
+            output = root / "lab-evidence"
+            with patch.object(Path, "is_symlink", return_value=True):
+                with self.assertRaisesRegex(ValueError, "Symlink input is not allowed"):
+                    stage_evidence(src, output)
+            self.assertFalse(output.exists())
 
 
 if __name__ == "__main__":

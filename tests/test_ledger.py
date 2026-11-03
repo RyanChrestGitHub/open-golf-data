@@ -100,6 +100,7 @@ class LedgerTests(unittest.TestCase):
         run_fixture(self.ledger)
         self.ledger.close()
         self.ledger = Ledger(self.db)
+        self.addCleanup(self.ledger.close)
         self.assertEqual(run_fixture(self.ledger)["inserted"], 0)
         self.assertEqual(self.ledger.counts()["observations"], 5)
 
