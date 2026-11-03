@@ -44,6 +44,18 @@ overwriting the staged bytes or issuing a new receipt. A failed initial copy can
 leave a directory containing mismatched bytes without a receipt; retain it for
 investigation rather than treating directory existence as successful staging.
 These deterministic checks do not establish crash-safe or concurrent acquisition.
+
+Run `python -m open_golf_data verify-evidence path/to/evidence-directory` to
+validate an existing v1 local receipt and rehash its `source.bin` without the
+original source file. Success reports `integrity_matches_receipt: true` and
+`provenance_verified: false`; invalid, missing or mismatched inputs exit nonzero.
+The command is read-only and preserves unknown receipt fields. It accepts only
+local, unsubmitted receipts with no publication or hardware approval; it does
+not upgrade claims, repair files, authenticate provenance or authorize sharing.
+Replacing both receipt and payload can produce a matching pair. See the
+[verification tests](../tests/test_evidence_verification.py); path checks are
+not a filesystem sandbox or protection against concurrent path changes.
+
 [CI](../.github/workflows/ci.yml) runs the suite and demo/inspection on Python 3.10
 and 3.13. Local success on one interpreter does not establish those CI results.
 The [documentation check](../tests/test_documentation.py) checks local inline file

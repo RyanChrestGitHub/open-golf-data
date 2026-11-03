@@ -2,11 +2,12 @@
 
 import argparse
 import json
+import sys
 from pathlib import Path
 
 from .fixture import run_fixture
 from .ledger import Ledger
-from .intake import stage_evidence
+from .intake import stage_evidence, verify_evidence
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -25,6 +26,8 @@ def main(argv: list[str] | None = None) -> int:
     evidence.add_argument("--version", default="unknown")
     evidence.add_argument("--route", default="unknown")
     evidence.add_argument("--kind", default="unknown")
+    evidence_verify = cmds.add_parser("verify-evidence", help="Read-only receipt and staged-byte integrity check")
+    evidence_verify.add_argument("directory", type=Path, help="Directory containing receipt.json and source.bin")
     args = p.parse_args(argv)
     if args.command == "demo":
         output = Path(args.output)
@@ -47,6 +50,15 @@ def main(argv: list[str] | None = None) -> int:
                                  route=args.route, kind=args.kind)
         print(json.dumps(receipt, indent=2, sort_keys=True))
         print("Evidence staged locally only. It has NOT been uploaded or certified.")
+    elif args.command == "verify-evidence":
+        try:
+            receipt = verify_evidence(args.directory)
+        except ValueError as exc:
+            print(f"Evidence verification failed: {exc}", file=sys.stderr)
+            return 1
+        print(json.dumps({"evidence_id": receipt["evidence_id"],
+                          "integrity_matches_receipt": True,
+                          "provenance_verified": False}, indent=2))
     elif args.command == "inspect":
         with Ledger(args.database) as ledger:
             print(json.dumps(ledger.counts(), indent=2))
