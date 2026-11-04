@@ -56,6 +56,23 @@ Replacing both receipt and payload can produce a matching pair. See the
 [verification tests](../tests/test_evidence_verification.py); path checks are
 not a filesystem sandbox or protection against concurrent path changes.
 
+Run `python -m open_golf_data inspect-evidence path/to/evidence-directory` for
+a separate versioned structural report. It first stream-verifies the entire
+payload, then probes complete files up to 65,536 bytes using UTF-8 (optional
+UTF-8 BOM), JSON with nesting at most 32, and comma CSV with at most 256 records
+including the first row. CSV needs at least two rows and two consistent columns;
+this is a candidate syntax, not a source schema. Limit, malformed JSON-looking,
+unsupported encoding and ambiguous cases abstain with a static reason. A limit
+abstention exits zero as a valid inspection report; integrity failures exit one.
+Reports contain identifiers and structural results, without raw values, source
+claims, instruction text or local paths. Evidence and receipts are unchanged.
+All results abstain from adapter selection pending accepted source evidence.
+Syntax cannot establish metric semantics, provenance, permission or physical
+compatibility; reports are not a privacy filter or approval to share. See
+[classification tests](../tests/test_classification.py) for fictional boundaries
+and corrupt/changed input. Registry-based duplicate and adapter routing remain
+separate work; no network, research issue or code PR is triggered by inspection.
+
 [CI](../.github/workflows/ci.yml) runs the suite and demo/inspection on Python 3.10
 and 3.13. Local success on one interpreter does not establish those CI results.
 The [documentation check](../tests/test_documentation.py) checks local inline file

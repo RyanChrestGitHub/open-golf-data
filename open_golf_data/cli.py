@@ -8,6 +8,7 @@ from pathlib import Path
 from .fixture import run_fixture
 from .ledger import Ledger
 from .intake import stage_evidence, verify_evidence
+from .classification import inspect_evidence
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -28,6 +29,8 @@ def main(argv: list[str] | None = None) -> int:
     evidence.add_argument("--kind", default="unknown")
     evidence_verify = cmds.add_parser("verify-evidence", help="Read-only receipt and staged-byte integrity check")
     evidence_verify.add_argument("directory", type=Path, help="Directory containing receipt.json and source.bin")
+    evidence_inspect = cmds.add_parser("inspect-evidence", help="Read-only bounded syntax inspection; no adapter selection")
+    evidence_inspect.add_argument("directory", type=Path, help="Staged evidence directory")
     args = p.parse_args(argv)
     if args.command == "demo":
         output = Path(args.output)
@@ -50,6 +53,13 @@ def main(argv: list[str] | None = None) -> int:
                                  route=args.route, kind=args.kind)
         print(json.dumps(receipt, indent=2, sort_keys=True))
         print("Evidence staged locally only. It has NOT been uploaded or certified.")
+    elif args.command == "inspect-evidence":
+        try:
+            report = inspect_evidence(args.directory)
+        except ValueError:
+            print("Evidence inspection failed: invalid or changed staged evidence", file=sys.stderr)
+            return 1
+        print(json.dumps(report, indent=2, sort_keys=True))
     elif args.command == "verify-evidence":
         try:
             receipt = verify_evidence(args.directory)
