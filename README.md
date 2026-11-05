@@ -1,14 +1,41 @@
-# Open Golf Data — Laboratory Bootstrap
+# Open Golf Data
 
-> **Status: synthetic proof of architecture only.** Not a launch-monitor integration, authenticated portal, commercial deployment, or security-certified product.
+**Any launch monitor, any simulator, your data.**
 
-## The purpose
+We are building an open data contract so golfers can keep and reuse their
+lawfully accessible launch-monitor outputs, and manufacturers and simulator
+makers can support a common interface. This is our direction; universal
+compatibility has not been demonstrated.
 
-Golfers should be able to retrieve and use the original measurements **exposed through supported, authorized launch-monitor interfaces**—whether they play at home or in a commercial simulator bay.
+**Available today:** a local laboratory with a fictional-session demo, portable
+JSON/CSV exports, unchanged-file evidence staging, integrity verification and
+bounded JSON/CSV syntax inspection. Real hardware compatibility, live simulator
+connections and authenticated golfer delivery remain unverified.
 
-The collector and portable history are meant to be open source. Analytics and AI coaching are intentionally not part of this project.
+## Who it is for
 
-A good handoff means source records are preserved, simulated and device-derived quantities are not conflated, the correct golfer receives the records, and the history can be exported without proprietary software. Unavailable data and ambiguous player identity must never be invented.
+- **Golfers:** keep an inspectable history and take it to other compatible tools.
+- **Launch-monitor makers:** expose supported outputs through a documented contract
+  while retaining their proprietary measurement technology.
+- **Simulator and app makers:** consume a common model instead of rebuilding each
+  source integration. Simpler integration is a goal we still need to test.
+
+## What the contract must preserve
+
+Keep the original source bytes and their digest alongside any standardized
+representation. Retain units, unknown fields and missing values; distinguish
+reported, vendor-estimated, simulated, calculated and unknown quantities. A
+simulator result and a monitor observation are separate events unless evidence
+supports linking them. Unknown player identity stays unassigned.
+
+A portable file does not establish a live connection. Live observations,
+readiness and control need separately specified interfaces, permissions and
+tests. Normalizing accessible outputs does not require reproducing a maker's
+proprietary measurement algorithms or assuming access to every device.
+
+The collector and portable history are open source. Analytics and AI coaching
+are outside this project's scope. See [product direction](docs/PRODUCT-DIRECTION.md)
+for the proof sequence and the limits on compatibility claims.
 
 ## Run Laboratory 0001
 
@@ -49,9 +76,9 @@ The demo includes five independent observations: one native-like device observat
 | Unattributed records excluded from per-player export | Yes | Four-player real-world identity accuracy |
 | Player history exports CSV and JSON | Yes | Secure remote portal and API |
 
-## Source-agnostic evidence intake (new)
+## Bring evidence from any source
 
-The laboratory intentionally **does not prefer Uneekor or any other brand**. Anyone can offer a native export, log, report, screenshot, protocol sample, or an unknown binary format. The first authorized, reproducible real source can become the first physical integration.
+We welcome evidence from any manufacturer: native exports, logs, reports, screenshots, protocol examples and unknown formats. Each has a different use. A research table or hand-written protocol example can inform the contract without proving a native export or physical integration. The first hardware integration will follow authorized, reproducible evidence.
 
 Stage your own file locally without sending it anywhere:
 
@@ -61,7 +88,19 @@ python -m open_golf_data evidence path/to/file --output lab-evidence --device "o
 
 The command computes a digest, preserves the original bytes as `source.bin`, and writes a local `receipt.json` with unverified format hints. The `lab-evidence/` directory is gitignored. **This is not an upload, adapter, privacy filter, source verification, or certification.** Review all files for personal/facility information before sharing.
 
-[Evidence intake and agentic routing RFC](docs/RFC-0002-EVIDENCE-INTAKE.md)
+Check a staged directory without changing it:
+
+```bash
+python -m open_golf_data verify-evidence path/to/evidence-directory
+python -m open_golf_data inspect-evidence path/to/evidence-directory
+```
+
+Verification checks bytes against the saved receipt. Inspection checks supported
+syntax within fixed limits and can decline to classify a file. Neither command
+establishes source authenticity, metric meaning, permission to share, or hardware
+support. See the [engineering playbook](docs/ENGINEERING-PLAYBOOK.md) for limits.
+
+[Evidence intake and routing proposal](docs/RFC-0002-EVIDENCE-INTAKE.md)
 
 ## The next three milestone issues
 
@@ -73,6 +112,8 @@ The command computes a digest, preserves the original bytes as `source.bin`, and
 
 ## Engineering system
 
+Start with the [documentation guide](docs/README.md) for project design, evidence handling and contributor workflows.
+
 - [Agent instructions](AGENTS.md)
 - [Engineering playbook](docs/ENGINEERING-PLAYBOOK.md)
 - [Architecture RFC](docs/RFC-0001.md)
@@ -80,26 +121,18 @@ The command computes a digest, preserves the original bytes as `source.bin`, and
 - [Evidence and physical test protocol](docs/LAB-0001.md)
 - [Agentic work loop](docs/AGENT-LOOP.md)
 - [Issue backlog](docs/BACKLOG.md)
-- [First delegated coding task](docs/AGENT-TASK-001.md)
 - [Security and privacy](docs/SECURITY.md)
 
 CI runs the deterministic tests on supported Python versions. **The optional Codex review workflow is manual-only** and requires you to set `OPENAI_API_KEY` as a repository secret before dispatch; it produces a review artifact, not code changes. No scheduled scout, autonomous coding PRs, private upload service, or remote sync is activated by this bootstrap. Those require explicit GitHub configuration and a validated threat model.
 
-## Publishing to GitHub
+## Contributing
 
-Use a **new** repository, separate from any personal golf analysis files. The draft name `open-golf-data` can change. With the GitHub CLI authenticated:
+Start with nonpersonal source descriptions and the interface or export you can
+lawfully access. Keep real player records private; agree a permitted transfer and
+review process before sharing files. Technical acceptance and compatibility
+claims require reproducible evidence. Follow the [agent instructions](AGENTS.md)
+and [security guidance](docs/SECURITY.md).
 
-```bash
-git init
-git add .
-git commit -m "Bootstrap evidence-led open golf data laboratory"
-gh repo create open-golf-data --public --source=. --push
-```
-
-Alternatively, create an empty public repository via GitHub's web UI (without a generated README), then add `origin` and push. Before publishing, review the license, your chosen repository name, and all bundled files.
-
-The MIT license is a **starting suggestion**, not a determination that all future vendor drivers can be redistributed under MIT. Review dependencies and any vendor interface permissions before adding integrations.
-
-## First public message
-
-> We're building open, portable launch-monitor measurement history. The first release is a tested, synthetic local data ledger—not a claimed universal connector. We are looking for hardware owners willing to validate authorized interfaces and help document exactly which measurements are accessible on each device and software version. No private shot logs should be posted to public issues.
+The repository's MIT license does not settle the rights to every external dataset,
+vendor interface or future driver. Record the applicable source terms and allowed
+uses for each contribution.
