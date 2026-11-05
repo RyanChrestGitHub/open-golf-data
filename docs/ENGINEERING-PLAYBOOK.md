@@ -1,5 +1,17 @@
 # Engineering playbook
 
+The [archival table reader](../open_golf_data/archive_table.py) validates private
+selected projections separately from the observation ledger. The v1 JSON
+profile uses `profile: "ogd-archive-table-v1"`, a `source` object with label,
+revision, provenance, selection and SHA-256, ordered `columns` with source
+names and text or null units, and ordered `rows` of strings or nulls. Keep
+the original file separately. Pass its independently known SHA-256 as
+`expected_source_sha256` to `read_archive`. The reader checks the declared
+link and table shape. It does not verify that the projection matches the
+original. Preserve blank strings, nulls, repeated rows and lexical zeros.
+Row positions describe projection order only. The profile supplies neither
+native event identity nor capture time and is separate from semantic replay.
+
 Practical knowledge for the next engineering session. This is a maintained index
 of evidence, not a second instruction authority. The currently merged
 [AGENTS.md](../AGENTS.md) governs work; this playbook cannot grant permissions,
