@@ -112,6 +112,8 @@ support. See the [engineering playbook](docs/ENGINEERING-PLAYBOOK.md) for limits
 
 ## Engineering system
 
+Start with the [documentation guide](docs/README.md) for project design, evidence handling and contributor workflows.
+
 - [Agent instructions](AGENTS.md)
 - [Engineering playbook](docs/ENGINEERING-PLAYBOOK.md)
 - [Architecture RFC](docs/RFC-0001.md)
@@ -119,7 +121,6 @@ support. See the [engineering playbook](docs/ENGINEERING-PLAYBOOK.md) for limits
 - [Evidence and physical test protocol](docs/LAB-0001.md)
 - [Agentic work loop](docs/AGENT-LOOP.md)
 - [Issue backlog](docs/BACKLOG.md)
-- [First delegated coding task](docs/AGENT-TASK-001.md)
 - [Security and privacy](docs/SECURITY.md)
 
 CI runs the deterministic tests on supported Python versions. **The optional Codex review workflow is manual-only** and requires you to set `OPENAI_API_KEY` as a repository secret before dispatch; it produces a review artifact, not code changes. No scheduled scout, autonomous coding PRs, private upload service, or remote sync is activated by this bootstrap. Those require explicit GitHub configuration and a validated threat model.
