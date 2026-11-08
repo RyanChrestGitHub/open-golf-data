@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "source_repository": "https://github.com/bluedaniel/square-stats",
+  "source_revision": "11a4d7225cf5a13633a3afa7e8c433eb250c02a6",
+  "files": [
+    {
+      "path": "bluedaniel_18Jun2026_00-15_52_18_Jun._2026-.csv",
+      "bytes": 9307,
+      "sha256": "3e01416ef5e9409d7f791c1b47c3b6a9b10a00bb58fca9db3e28f115a67c6b35",
+      "git_blob_sha1": "d83426395060b26cf9ae14a364bdbb6b9356f4e2",
+      "source_url": "https://github.com/bluedaniel/square-stats/blob/11a4d7225cf5a13633a3afa7e8c433eb250c02a6/test-fixtures/bluedaniel_18Jun2026_00-15_52_18_Jun._2026-.csv"
+    },
+    {
+      "path": "gapping_session_22Jun2026.csv",
+      "bytes": 9763,
+      "sha256": "6405e807c34576428222a4ac183b60083d540dcef85a76955ec0e3ec2ebcc3bd",
+      "git_blob_sha1": "ca3e6b7c0f1d4cf950b683b5c37922c928d87dbd",
+      "source_url": "https://github.com/bluedaniel/square-stats/blob/11a4d7225cf5a13633a3afa7e8c433eb250c02a6/test-fixtures/gapping_session_22Jun2026.csv"
+    }
+  ],
+  "classification": "Third-party CSV fixtures; physical origin unverified",
+  "publication_basis": "Project maintainer explicitly authorized importing these two public repository fixtures on 2026-11-07 after confirming no direct Reddit reply.",
+  "upstream_license": "Not identified; no upstream author permission response received. This import does not relicense the files.",
+  "device": "Unknown; Omni is a maintainer-directed working assumption only",
+  "firmware_version": null,
+  "capture_software_version": null,
+  "physical_compatibility_verified": false
+}
