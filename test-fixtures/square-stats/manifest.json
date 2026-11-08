@@ -21,8 +21,10 @@
   "classification": "Third-party CSV fixtures; physical origin unverified",
   "publication_basis": "Project maintainer explicitly authorized importing these two public repository fixtures on 2026-11-07 after confirming no direct Reddit reply.",
   "upstream_license": "Not identified; no upstream author permission response received. This import does not relicense the files.",
-  "device": "Unknown; Omni is a maintainer-directed working assumption only",
+  "device": "Square Omni",
   "firmware_version": null,
   "capture_software_version": null,
-  "physical_compatibility_verified": false
+  "physical_compatibility_verified": false,
+  "device_evidence": "Project maintainer confirmation on 2026-11-07; no independent physical validation",
+  "version_assumption": "Newest firmware and software available as of each source-labelled capture date, per project maintainer instruction; exact releases unverified"
 }
