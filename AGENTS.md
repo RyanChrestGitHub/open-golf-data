@@ -1,5 +1,14 @@
 # Agent engineering contract — Open Golf Data
 
+## Public sources and direct submissions
+
+Apply canonical CONTROL-004 when adopted; until then CONTROL-003 and current specific Board decisions govern. Public datasets and directly submitted files follow separate paths. For public sources, investigate publication context, intended use, applicable terms and privacy; record facts, reports, justified assumptions and unknowns. A missing author reply, golfer identity or exact firmware does not by itself prohibit scoped research or make real external data unreal. Keep physical-validation claims separate. Specific restrictions require a precise use-level disposition, not a universal fresh-consent or contributor-engagement gate.
+
+Direct submissions retain provenance/authority questions, permitted storage and analysis, separate publication scope, participant/venue requirements, private transfer, retention and withdrawal controls. Public visibility alone does not establish all reuse rights. Existing CONTROL-003 local-slice limits and human-merge/publication gates remain. No raw evidence upload, outreach or privilege expansion is added.
+
+Record public-source status separately from contributor stages: usable-now purpose, original/processed/transcribed/unknown origin, assumptions, exact blocked use, evidence and next owner/trigger. Reconcile actual Engineering acceptance and merged artifacts; never promote physical compatibility merely because fixtures or hashes pass.
+
+
 This repo is a deterministic evidence-preserving collector, **not** an AI golf coach.
 Agent outputs are hypotheses and patches; CI and real device evidence determine acceptance.
 
