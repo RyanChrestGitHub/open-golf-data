@@ -21,6 +21,27 @@ original. Preserve blank strings, nulls, repeated rows and lexical zeros.
 Row positions describe projection order only. The profile supplies neither
 native event identity nor capture time and is separate from semantic replay.
 
+The [metric view](../open_golf_data/metric_view.py) reads one archival column
+through a caller-supplied common key. Supply a `MetricMapping` with source SHA-256,
+exact source field, mapping provenance, confidence (`unknown`, `tentative`, or
+`supported`) and metric kind (default `unknown`). Confidence describes evidence
+for the interpretation. It does not certify a device. The optional expected unit
+is compared literally with the declared source unit. Results expose `declared`,
+`unknown`, or `conflicting` unit status and retain the source column and raw
+lexical values. No numeric conversion occurs. Null, blank, zero text and repeated
+rows remain distinct. Missing, ambiguous or wrong-source mappings fail closed.
+
+For example, a fictional producer can configure
+`MetricMapping("ball_speed", digest, "Speed", "fictional mapping r1", "tentative")`.
+A consumer calls `read_metric(path, expected_source_sha256=digest,
+metric_key="ball_speed", mappings=mappings)` and inspects `source_column`,
+`unit_status`, `mapping`, and `rows`. Another producer can bind the same key to
+another source field and unit. Consumers must inspect units and uncertainty
+before arithmetic. Keys are caller vocabulary, not a finalized universal
+standard. A mapping is an explicit interpretation of an archival projection.
+The existing digest checks retain their projection-verification limits.
+See [fictional boundary tests](../tests/test_metric_view.py).
+
 Practical knowledge for the next engineering session. This is a maintained index
 of evidence, not a second instruction authority. The currently merged
 [AGENTS.md](../AGENTS.md) governs work; this playbook cannot grant permissions,
