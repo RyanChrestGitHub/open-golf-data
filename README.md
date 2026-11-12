@@ -76,6 +76,29 @@ The demo includes five independent observations: one native-like device observat
 | Unattributed records excluded from per-player export | Yes | Four-player real-world identity accuracy |
 | Player history exports CSV and JSON | Yes | Secure remote portal and API |
 
+## Inspect a common archival metric offline
+
+From a fresh checkout, run this command with the included fictional archive and
+mapping configuration. It prints one JSON metric view to standard output.
+
+```bash
+python -m open_golf_data metric-view examples/fictional_archive.json --mappings examples/fictional_mappings.json --source-sha256 abababababababababababababababababababababababababababababababab --key ball_speed
+```
+
+The result includes raw lexical values, missing/blank status, the source field
+and unit, mapping provenance, confidence and metric kind. Use `--key
+unknown_quantity` or `--key duration` with the same command to see unknown and
+conflicting units. The duration example retains its numbers without rescaling.
+All example values and the source digest are invented.
+
+For an authorized archival table, supply its path, independently known source
+digest and a JSON list of explicit mappings. Each mapping binds a common key to
+an exact source field and digest. The consumer command stays the same across
+source layouts. This is a read-only view. Its JSON can contain sensitive source
+values, so keep real output within its approved storage and sharing scope.
+See the [engineering playbook](docs/ENGINEERING-PLAYBOOK.md) for the mapping API
+and interpretation limits.
+
 ## Bring evidence from any source
 
 We welcome evidence from any manufacturer: native exports, logs, reports, screenshots, protocol examples and unknown formats. Each has a different use. A research table or hand-written protocol example can inform the contract without proving a native export or physical integration. The first hardware integration will follow authorized, reproducible evidence.

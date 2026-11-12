@@ -1,0 +1,24 @@
+[
+  {
+    "key": "ball_speed",
+    "source_sha256": "abababababababababababababababababababababababababababababababab",
+    "field": "Example speed",
+    "provenance": "Invented example mapping v1",
+    "confidence": "tentative"
+  },
+  {
+    "key": "unknown_quantity",
+    "source_sha256": "abababababababababababababababababababababababababababababababab",
+    "field": "Unspecified quantity",
+    "provenance": "Invented example with unknown unit",
+    "confidence": "unknown"
+  },
+  {
+    "key": "duration",
+    "source_sha256": "abababababababababababababababababababababababababababababababab",
+    "field": "Example duration",
+    "provenance": "Invented conflicting-unit example; no conversion",
+    "confidence": "unknown",
+    "expected_unit": "ms"
+  }
+]

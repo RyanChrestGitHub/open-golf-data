@@ -9,6 +9,8 @@ from .fixture import run_fixture
 from .ledger import Ledger
 from .intake import stage_evidence, verify_evidence
 from .classification import inspect_evidence
+from .archive_table import _unique_object
+from .metric_view import MetricMapping, read_metric
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -31,6 +33,11 @@ def main(argv: list[str] | None = None) -> int:
     evidence_verify.add_argument("directory", type=Path, help="Directory containing receipt.json and source.bin")
     evidence_inspect = cmds.add_parser("inspect-evidence", help="Read-only bounded syntax inspection; no adapter selection")
     evidence_inspect.add_argument("directory", type=Path, help="Staged evidence directory")
+    metric = cmds.add_parser("metric-view", help="Read one explicitly mapped archival metric as JSON")
+    metric.add_argument("archive", type=Path, help="Local archival table JSON")
+    metric.add_argument("--mappings", required=True, type=Path, help="Local JSON list of MetricMapping objects")
+    metric.add_argument("--source-sha256", required=True, help="Independently known source digest")
+    metric.add_argument("--key", required=True, help="Common metric key from the supplied mappings")
     args = p.parse_args(argv)
     if args.command == "demo":
         output = Path(args.output)
@@ -47,6 +54,19 @@ def main(argv: list[str] | None = None) -> int:
         print(json.dumps(report, indent=2))
         print(f"Synthetic lab complete: {output.resolve()}")
         print("No real launch monitor, cloud login, or network synchronization is implemented.")
+    elif args.command == "metric-view":
+        try:
+            config = json.loads(args.mappings.read_text(encoding="utf-8"),
+                                object_pairs_hook=_unique_object)
+            if not isinstance(config, list):
+                raise ValueError("mapping list required")
+            mappings = [MetricMapping(**item) for item in config]
+            report = read_metric(args.archive, expected_source_sha256=args.source_sha256,
+                                 metric_key=args.key, mappings=mappings)
+        except (OSError, ValueError, TypeError):
+            print("Metric view failed: invalid archive, mappings, key or source digest", file=sys.stderr)
+            return 1
+        print(json.dumps(report, indent=2))
     elif args.command == "evidence":
         receipt = stage_evidence(args.file, args.output, device=args.device,
                                  software=args.software, version=args.version,
