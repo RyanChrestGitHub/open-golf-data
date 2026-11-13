@@ -1,0 +1,20 @@
+{
+  "profile": "ogd-archive-table-v1",
+  "source": {
+    "label": "fictional-example",
+    "revision": "invented-v1",
+    "sha256": "abababababababababababababababababababababababababababababababab",
+    "provenance": "Entirely invented example; digest is a fictional source link",
+    "selection": "Three fictional rows and three columns"
+  },
+  "columns": [
+    {"name": "Example speed", "unit": "mph"},
+    {"name": "Unspecified quantity", "unit": null},
+    {"name": "Example duration", "unit": "sec"}
+  ],
+  "rows": [
+    ["0.00", "2", "714"],
+    [null, "", "0.0"],
+    ["", null, "0"]
+  ]
+}

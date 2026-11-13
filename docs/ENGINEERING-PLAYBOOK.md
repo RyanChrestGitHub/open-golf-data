@@ -42,6 +42,19 @@ standard. A mapping is an explicit interpretation of an archival projection.
 The existing digest checks retain their projection-verification limits.
 See [fictional boundary tests](../tests/test_metric_view.py).
 
+The local `metric-view` CLI exposes this reader without consumer Python code.
+Pass an archive path, `--source-sha256`, `--mappings` (a JSON list of mapping
+objects), and `--key`. It emits JSON only on success and returns one on invalid
+input, missing mappings or digest mismatch. Duplicate JSON mapping keys are
+rejected. It reads local files and writes only to stdout. Real output can contain
+sensitive source cells and needs the source's existing handling controls.
+The [README command](../README.md) uses a fully
+[fictional archive](../examples/fictional_archive.json) and
+[mapping configuration](../examples/fictional_mappings.json). The example digest
+is an invented source link. It does not authenticate source bytes. See
+[CLI tests](../tests/test_cli.py) for successful, unknown/conflicting-unit and
+invalid-input paths.
+
 Practical knowledge for the next engineering session. This is a maintained index
 of evidence, not a second instruction authority. The currently merged
 [AGENTS.md](../AGENTS.md) governs work; this playbook cannot grant permissions,
