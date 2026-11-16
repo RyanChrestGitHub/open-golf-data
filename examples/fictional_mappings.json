@@ -20,5 +20,13 @@
     "provenance": "Invented conflicting-unit example; no conversion",
     "confidence": "unknown",
     "expected_unit": "ms"
+  },
+  {
+    "key": "ball_speed",
+    "source_sha256": "cdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd",
+    "field": "Velocity",
+    "provenance": "Invented second source mapping v1; deliberately conflicting expected unit",
+    "confidence": "unknown",
+    "expected_unit": "mph"
   }
 ]
