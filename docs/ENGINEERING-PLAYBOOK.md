@@ -180,3 +180,9 @@ pending evidence. A passing link check cannot certify a claim. Changes to
 `AGENTS.md` must be explicitly identified in the PR with rationale for maintainer
 review; proposed text does not authorize the current session. Keep the existing
 hard constraints and human merge gate intact.
+
+The README includes two fictional archives using the same `ball_speed` CLI key.
+The second uses `Velocity` in km/h with an intentionally conflicting mph expectation;
+lexical values and repeated rows remain unchanged. The first example also exposes
+an unknown-unit quantity. These are consumer configuration examples, not adapters
+or physical evidence. See [example regression](../tests/test_two_source_example.py).
