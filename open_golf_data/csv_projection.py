@@ -96,7 +96,12 @@ def project_csv(evidence: Path, config: Path, output: Path) -> dict:
     if text.startswith('\ufeff') or '\0' in text:
         raise ValueError("BOM and NUL are unsupported")
     _validate_quotes(text)
-    records = list(csv.reader(io.StringIO(text, newline=""), strict=True))
+    previous_limit = csv.field_size_limit()
+    try:
+        csv.field_size_limit(MAX_BYTES)
+        records = list(csv.reader(io.StringIO(text, newline=""), strict=True))
+    finally:
+        csv.field_size_limit(previous_limit)
     if last > len(records):
         raise ValueError("selected records absent")
     fields = records[header - 1]

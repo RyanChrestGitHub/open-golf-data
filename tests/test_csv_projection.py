@@ -121,6 +121,21 @@ class CsvProjectionTests(unittest.TestCase):
         project_csv(self.root / "twenty" / receipt["evidence_id"], self.config, self.output)
         self.assertEqual(json.loads(self.output.read_text())["rows"], [["00", 'a"b']] * 20)
 
+    def test_fields_above_python_default_limit_within_byte_bound(self):
+        long_text = "x" * 140000
+        self.source.write_bytes(("Speed,Note\n0.00," + long_text + "\n").encode())
+        receipt = stage_evidence(self.source, self.root / "long")
+        evidence = self.root / "long" / receipt["evidence_id"]
+        previous_limit = csv.field_size_limit()
+        for columns in (self.spec["columns"], [dict(name="Speed", unit="mph")]):
+            spec = dict(self.spec, header_record=1, first_record=2, last_record=2, columns=columns)
+            self.config.write_text(json.dumps(spec))
+            project_csv(evidence, self.config, self.output)
+            rows = json.loads(self.output.read_text())["rows"]
+            self.assertEqual(rows, [["0.00", long_text]] if len(columns) == 2 else [["0.00"]])
+            self.assertEqual(csv.field_size_limit(), previous_limit)
+            self.output.unlink()
+
     def test_cli_failure_has_no_partial_stdout_or_archive(self):
         self.config.write_text('{"encoding":"utf-8","encoding":"utf-16"}')
         stdout, stderr = io.StringIO(), io.StringIO()
