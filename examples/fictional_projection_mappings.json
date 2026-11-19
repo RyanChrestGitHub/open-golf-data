@@ -1,0 +1,10 @@
+[
+  {
+    "key": "ball_speed",
+    "source_sha256": "6a09228c0c58c1de7d98b984f3766b271d8ee21bc384f29b3f74ef14de744c87",
+    "field": "Speed",
+    "provenance": "Fictional configuration",
+    "confidence": "tentative",
+    "expected_unit": "km/h"
+  }
+]
