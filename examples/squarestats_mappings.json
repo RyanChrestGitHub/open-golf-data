@@ -1,0 +1,20 @@
+[
+  {
+    "key": "ball_speed",
+    "source_sha256": "3e01416ef5e9409d7f791c1b47c3b6a9b10a00bb58fca9db3e28f115a67c6b35",
+    "field": "Ball Speed(mph)",
+    "provenance": "Tentative interpretation of exact published CSV header; no physical validation",
+    "confidence": "tentative",
+    "kind": "unknown",
+    "expected_unit": "mph"
+  },
+  {
+    "key": "carry_distance",
+    "source_sha256": "3e01416ef5e9409d7f791c1b47c3b6a9b10a00bb58fca9db3e28f115a67c6b35",
+    "field": "Carry(yd)",
+    "provenance": "Tentative interpretation of exact published CSV header; no physical validation",
+    "confidence": "tentative",
+    "kind": "unknown",
+    "expected_unit": "yd"
+  }
+]
