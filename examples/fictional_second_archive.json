@@ -1,0 +1,27 @@
+{
+  "profile": "ogd-archive-table-v1",
+  "source": {
+    "label": "fictional-second-source",
+    "revision": "invented-v1",
+    "sha256": "cdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd",
+    "provenance": "Entirely invented example; digest is a fictional source link",
+    "selection": "Three fictional rows and one column"
+  },
+  "columns": [
+    {
+      "name": "Velocity",
+      "unit": "km/h"
+    }
+  ],
+  "rows": [
+    [
+      "000.00"
+    ],
+    [
+      "1.2300"
+    ],
+    [
+      "1.2300"
+    ]
+  ]
+}

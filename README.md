@@ -139,6 +139,30 @@ and derived outputs within their authorized handling scope. Local receipt
 integrity does not authenticate provenance or protect against concurrent path
 changes. Output publication uses a same-directory temporary file and a
 non-overwriting hard link; filesystems without hard-link support fail closed.
+### Use the same key for a second fictional source
+
+The first command below repeats the existing example. The second uses the same
+consumer command and `ball_speed` key with a different source label, field and
+unit. Both run from a fresh checkout with no source-specific consumer code.
+
+```bash
+python -m open_golf_data metric-view examples/fictional_archive.json --mappings examples/fictional_mappings.json --source-sha256 abababababababababababababababababababababababababababababababab --key ball_speed
+python -m open_golf_data metric-view examples/fictional_second_archive.json --mappings examples/fictional_mappings.json --source-sha256 cdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd --key ball_speed
+```
+
+| Result | First source | Second source |
+| --- | --- | --- |
+| Source field / unit | Example speed / mph | Velocity / km/h |
+| Mapping confidence / kind | tentative / unknown | unknown / unknown |
+| Unit status | declared | conflicting (expected mph, declared km/h) |
+| Raw values | `"0.00"`, null, `""` | `"000.00"`, `"1.2300"`, `"1.2300"` |
+
+The conflict is intentional: values remain unchanged, with no conversion,
+arithmetic, row matching or comparison implied. Inspect units and uncertainty
+before using values. For a missing-unit example, rerun the first command with
+`--key unknown_quantity`; its unit status is `unknown`. These invented source
+links demonstrate configurable archival interpretation, not physical validation
+or a universal metric standard.
 
 ## Bring evidence from any source
 
