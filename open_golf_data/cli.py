@@ -1,6 +1,7 @@
 """Local-only CLI for the first synthetic laboratory."""
 
 import argparse
+import csv
 import json
 import sys
 from pathlib import Path
@@ -11,6 +12,7 @@ from .intake import stage_evidence, verify_evidence
 from .classification import inspect_evidence
 from .archive_table import _unique_object
 from .metric_view import MetricMapping, read_metric
+from .csv_projection import project_csv
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -38,6 +40,10 @@ def main(argv: list[str] | None = None) -> int:
     metric.add_argument("--mappings", required=True, type=Path, help="Local JSON list of MetricMapping objects")
     metric.add_argument("--source-sha256", required=True, help="Independently known source digest")
     metric.add_argument("--key", required=True, help="Common metric key from the supplied mappings")
+    projection = cmds.add_parser("project-csv", help="Project explicitly selected staged CSV records locally")
+    projection.add_argument("directory", type=Path, help="Verified staged evidence directory")
+    projection.add_argument("--config", required=True, type=Path)
+    projection.add_argument("--output", required=True, type=Path, help="New archival JSON path")
     args = p.parse_args(argv)
     if args.command == "demo":
         output = Path(args.output)
@@ -54,6 +60,13 @@ def main(argv: list[str] | None = None) -> int:
         print(json.dumps(report, indent=2))
         print(f"Synthetic lab complete: {output.resolve()}")
         print("No real launch monitor, cloud login, or network synchronization is implemented.")
+    elif args.command == "project-csv":
+        try:
+            report = project_csv(args.directory, args.config, args.output)
+        except (OSError, ValueError, TypeError, csv.Error):
+            print("CSV projection failed: invalid staging, configuration, CSV or output", file=sys.stderr)
+            return 1
+        print(json.dumps(report, indent=2))
     elif args.command == "metric-view":
         try:
             config = json.loads(args.mappings.read_text(encoding="utf-8"),

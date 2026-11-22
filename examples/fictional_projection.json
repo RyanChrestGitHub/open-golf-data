@@ -1,0 +1,21 @@
+{
+  "encoding": "utf-8",
+  "delimiter": ",",
+  "header_record": 1,
+  "first_record": 2,
+  "last_record": 4,
+  "columns": [
+    {
+      "name": "Speed",
+      "unit": "mph"
+    },
+    {
+      "name": "Note",
+      "unit": null
+    }
+  ],
+  "label": "fictional-csv",
+  "revision": "invented-v1",
+  "provenance": "Entirely invented local example",
+  "selection": "Parsed CSV records 2-4; both fields"
+}

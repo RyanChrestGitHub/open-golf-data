@@ -99,6 +99,46 @@ values, so keep real output within its approved storage and sharing scope.
 See the [engineering playbook](docs/ENGINEERING-PLAYBOOK.md) for the mapping API
 and interpretation limits.
 
+## Project an explicitly selected fictional CSV
+
+Run from a fresh checkout with Python 3.10+. Use a new output path; the
+projection command refuses existing outputs. This example uses three fictional
+records, including a quoted comma/newline, blanks, lexical zeros and repeats.
+
+```bash
+python -m open_golf_data demo --output lab-output
+python -m open_golf_data evidence examples/fictional_projection.csv --output lab-evidence
+python -m open_golf_data project-csv lab-evidence/ev-6a09228c0c58c1de7d98b984 --config examples/fictional_projection.json --output lab-output/projection.json
+python -m open_golf_data metric-view lab-output/projection.json --mappings examples/fictional_projection_mappings.json --source-sha256 6a09228c0c58c1de7d98b984f3766b271d8ee21bc384f29b3f74ef14de744c87 --key ball_speed
+```
+
+The first command creates `lab-output` using the existing synthetic demo.
+The pinned source SHA-256 above is computed
+from the included fictional CSV bytes. Staging retains its bytes and receipt;
+projection verifies them and writes a separate archival table. `ball_speed`
+returns `"0.00"`, `""`, `"0.00"` with `conflicting` unit status (declared mph,
+expected km/h), tentative confidence and unknown kind. No conversion occurs.
+The Note column retains its quoted text and unknown unit, even though this
+metric request selects only Speed.
+
+[Selection configuration](examples/fictional_projection.json) explicitly supplies
+UTF-8/comma syntax, one-based header/first/last **parsed record** ordinals,
+exact unique column names, units (text or null), source label/revision,
+provenance and selection rationale. Quoted newlines do not increment record
+ordinals. Unselected fields remain in the original source; the archive records
+its range/field selection. Missing selected cells are rejected as ragged records,
+not invented as nulls; CSV empty fields remain blank strings.
+
+Limits: at most 1 MiB input and 20 selected records, strict UTF-8 without BOM or
+NUL, comma/double-quote CSV, at least two unique nonempty header fields. Other
+encodings/dialects, malformed CSV, ambiguous headers, invalid ranges/fields,
+changed staged bytes and existing outputs fail without publishing an archive.
+No dialect sniffing, units/identity inference, XLSX, adapter or physical claim.
+This command is not a privacy filter or publication permission; keep real inputs
+and derived outputs within their authorized handling scope. Local receipt
+integrity does not authenticate provenance or protect against concurrent path
+changes. Output publication uses a same-directory temporary file and a
+non-overwriting hard link; filesystems without hard-link support fail closed.
 ### Use the same key for a second fictional source
 
 The first command below repeats the existing example. The second uses the same

@@ -181,6 +181,19 @@ pending evidence. A passing link check cannot certify a claim. Changes to
 review; proposed text does not authorize the current session. Keep the existing
 hard constraints and human merge gate intact.
 
+## Explicit CSV projection
+
+`project-csv EVIDENCE_DIRECTORY --config CONFIG --output NEW_ARCHIVE` bridges
+verified local staging to the archival reader. It accepts only bounded strict
+UTF-8 comma CSV and explicit parsed-record/column/unit/source metadata selection.
+See the [README pipeline](../README.md) and [configuration](../examples/fictional_projection.json).
+Originals and receipts stay unchanged; blanks are strings, ragged selected rows
+fail, and unknown units require null. The source digest is rehashed from the
+parsed snapshot; output is validated with read_archive before non-overwriting
+hard-link publication. Limit: 1 MiB and 20 selected records. Unsupported filesystems
+fail closed. No automatic mapping, privacy approval, semantic or physical
+validation is supplied. Path checks are not a concurrency or filesystem sandbox.
+See [projection regression tests](../tests/test_csv_projection.py).
 The README includes two fictional archives using the same `ball_speed` CLI key.
 The second uses `Velocity` in km/h with an intentionally conflicting mph expectation;
 lexical values and repeated rows remain unchanged. The first example also exposes
