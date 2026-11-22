@@ -1,0 +1,15 @@
+{
+  "encoding": "utf-8",
+  "delimiter": ",",
+  "header_record": 3,
+  "first_record": 4,
+  "last_record": 6,
+  "columns": [
+    {"name": "Ball Speed(mph)", "unit": "mph"},
+    {"name": "Carry(yd)", "unit": "yd"}
+  ],
+  "label": "published-fixture-A",
+  "revision": "11a4d7225cf5a13633a3afa7e8c433eb250c02a6",
+  "provenance": "Existing maintainer-authorized third-party fixture; native/processed/physical origin unknown; upstream terms not relicensed",
+  "selection": "Parsed CSV records 4-6; two explicitly named fields; remaining fields retained in original"
+}

@@ -194,6 +194,10 @@ hard-link publication. Limit: 1 MiB and 20 selected records. Unsupported filesys
 fail closed. No automatic mapping, privacy approval, semantic or physical
 validation is supplied. Path checks are not a concurrency or filesystem sandbox.
 See [projection regression tests](../tests/test_csv_projection.py).
+The [existing-fixture recipe](SQUARESTATS-CONSUMER-RECIPE.md) resolves one published
+source through its manifest digest and supplies two tentative metric mappings.
+Its [regression](../tests/test_squarestats_recipe.py) uses invented bytes only;
+configuration wiring is separate from real-source replay or physical validation.
 The README includes two fictional archives using the same `ball_speed` CLI key.
 The second uses `Velocity` in km/h with an intentionally conflicting mph expectation;
 lexical values and repeated rows remain unchanged. The first example also exposes

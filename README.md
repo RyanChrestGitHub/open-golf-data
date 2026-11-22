@@ -164,6 +164,9 @@ before using values. For a missing-unit example, rerun the first command with
 links demonstrate configurable archival interpretation, not physical validation
 or a universal metric standard.
 
+For an existing third-party fixture, the [two-metric consumer recipe](docs/SQUARESTATS-CONSUMER-RECIPE.md)
+provides explicit selection and mappings with source, rights and physical-evidence limits.
+
 ## Bring evidence from any source
 
 We welcome evidence from any manufacturer: native exports, logs, reports, screenshots, protocol examples and unknown formats. Each has a different use. A research table or hand-written protocol example can inform the contract without proving a native export or physical integration. The first hardware integration will follow authorized, reproducible evidence.
